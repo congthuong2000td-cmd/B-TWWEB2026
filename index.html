@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalHelp | Hàng xóm giúp hàng xóm</title>
+    <meta name="description" content="Nền tảng cộng đồng giúp kết nối hàng xóm, hỗ trợ các việc nhỏ hằng ngày và xây dựng cộng đồng gắn kết.">
+    <meta name="keywords" content="cộng đồng, hàng xóm, hỗ trợ, kết nối, khu dân cư">
+    <meta property="og:title" content="LocalHelp - Hàng xóm giúp hàng xóm">
+    <meta property="og:description" content="Biến khu dân cư thành cộng đồng kết nối thật sự">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏘️</text></svg>">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <i class="fa-solid fa-hand-holding-heart loader-icon"></i>
+            <span class="loader-text">LocalHelp</span>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo" id="logo">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                LocalHelp
+            </a>
+            <div class="nav-links" id="nav-links">
+                <a href="#story">Câu chuyện</a>
+                <a href="#marketplace">Cộng đồng</a>
+                <a href="#map">Bản đồ</a>
+                <a href="#how-it-works">Cách thức</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <a href="#final-cta" class="btn btn-primary nav-cta">Tham gia ngay</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#story" class="mobile-link">Câu chuyện</a>
+        <a href="#marketplace" class="mobile-link">Cộng đồng</a>
+        <a href="#map" class="mobile-link">Bản đồ</a>
+        <a href="#how-it-works" class="mobile-link">Cách thức</a>
+        <a href="#final-cta" class="btn btn-primary" style="margin-top:16px;">Tham gia ngay</a>
+    </div>
+
+    <main>
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="hero-section">
+            <div class="hero-particles" id="hero-particles"></div>
+            <div class="hero-bg"></div>
+            <div class="container hero-content">
+                <div class="hero-text-box reveal">
+                    <span class="hero-badge">
+                        <i class="fa-solid fa-sparkles"></i>
+                        Ứng dụng cho cộng đồng hiện đại
+                    </span>
+                    <h1>Hàng xóm giúp<br><span class="highlight">hàng xóm.</span></h1>
+                    <p>Mượn đồ, nhờ giúp việc nhỏ, kết nối cộng đồng quanh bạn.<br>Biến khu dân cư thành một gia đình lớn.</p>
+                    <div class="hero-btns">
+                        <a href="#marketplace" class="btn btn-primary btn-glow">
+                            <i class="fa-solid fa-circle-plus"></i> Tôi cần giúp
+                        </a>
+                        <a href="#marketplace" class="btn btn-secondary">
+                            <i class="fa-solid fa-handshake"></i> Tôi có thể giúp
+                        </a>
+                    </div>
+                    <div class="hero-trust">
+                        <div class="trust-avatars">
+                            <img src="https://i.pravatar.cc/80?u=u1" alt="user">
+                            <img src="https://i.pravatar.cc/80?u=u2" alt="user">
+                            <img src="https://i.pravatar.cc/80?u=u3" alt="user">
+                            <img src="https://i.pravatar.cc/80?u=u4" alt="user">
+                        </div>
+                        <span><strong>850+</strong> hàng xóm đã tham gia</span>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal" style="transition-delay: 0.3s">
+                    <div class="hero-mockup">
+                        <div class="mockup-notification glass-card notif-1">
+                            <div class="notif-icon need-icon"><i class="fa-solid fa-wrench"></i></div>
+                            <div>
+                                <strong>Minh Hoàng</strong>
+                                <p>Cần mượn máy khoan – 50m</p>
+                            </div>
+                        </div>
+                        <div class="mockup-notification glass-card notif-2">
+                            <div class="notif-icon offer-icon"><i class="fa-solid fa-check-circle"></i></div>
+                            <div>
+                                <strong>Bác Hùng</strong>
+                                <p>Tôi có thể giúp! 🙌</p>
+                            </div>
+                        </div>
+                        <div class="mockup-notification glass-card notif-3">
+                            <div class="notif-icon success-icon"><i class="fa-solid fa-heart"></i></div>
+                            <div>
+                                <strong>Đã kết nối!</strong>
+                                <p>Chỉ mất 5 phút ⚡</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="scroll-indicator">
+                    <span>Cuộn để khám phá</span>
+                    <div class="mouse"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PROBLEM STORY SECTION -->
+        <section id="story" class="section-padding">
+            <div class="container">
+                <div class="story-grid">
+                    <div class="story-visual reveal">
+                        <div class="story-timeline">
+                            <div class="timeline-item timeline-1">
+                                <div class="timeline-dot need-dot"></div>
+                                <div class="timeline-card glass-card">
+                                    <div class="timeline-time">14:00</div>
+                                    <i class="fa-solid fa-hammer"></i>
+                                    <p> Tày cần mượn một chiếc máy khoan để treo ảnh gia đình.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item timeline-2">
+                                <div class="timeline-dot search-dot"></div>
+                                <div class="timeline-card glass-card">
+                                    <div class="timeline-time">14:01</div>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <p>Đăng yêu cầu lên LocalHelp. Tìm kiếm hàng xóm gần nhất...</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item timeline-3">
+                                <div class="timeline-dot success-dot"></div>
+                                <div class="timeline-card glass-card">
+                                    <div class="timeline-time">14:05</div>
+                                    <i class="fa-solid fa-handshake"></i>
+                                    <p>Bác Hùng ở tầng trên sẵn lòng cho mượn! Chỉ mất 5 phút.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-content reveal">
+                        <span class="section-tag">Câu chuyện của chúng tôi</span>
+                        <h2 class="section-title">Hơn cả một ứng dụng,<br>đó là sự <span class="highlight">kết nối.</span></h2>
+                        <p class="story-desc">Bạn đã bao giờ cần một chiếc thang gấp, một cái máy khoan, hay đơn giản là nhờ ai đó trông giúp thú cưng trong 1 giờ?</p>
+                        <p class="story-desc">Chúng ta sống cạnh nhau, nhưng đôi khi lại là những người xa lạ nhất. <strong>LocalHelp</strong> sinh ra để xóa bỏ khoảng cách đó.</p>
+                        <div class="story-quote">
+                            <i class="fa-solid fa-quote-left"></i>
+                            "Hàng xóm không còn là người xa lạ."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. NEED & SHARE SECTION -->
+        <section id="marketplace" class="section-padding marketplace-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Thị trường hỗ trợ</span>
+                    <h2 class="section-title">Cộng đồng đang cần gì?</h2>
+                    <p class="section-desc">Khám phá các yêu cầu hỗ trợ và đề nghị giúp đỡ từ hàng xóm xung quanh bạn.</p>
+                </div>
+                
+                <div class="filter-tabs reveal">
+                    <button class="tab-btn active" data-filter="all" id="filter-all">
+                        <i class="fa-solid fa-border-all"></i> Tất cả
+                    </button>
+                    <button class="tab-btn" data-filter="need" id="filter-need">
+                        <i class="fa-solid fa-hand-holding-heart"></i> Cần giúp
+                    </button>
+                    <button class="tab-btn" data-filter="offer" id="filter-offer">
+                        <i class="fa-solid fa-gift"></i> Có thể giúp
+                    </button>
+                </div>
+
+                <div class="cards-grid" id="cards-container">
+                    <!-- Cards populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. INTERACTIVE LOCAL MAP -->
+        <section id="map" class="section-padding map-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Bản đồ cộng đồng</span>
+                    <h2 class="section-title">Xung quanh bạn có gì?</h2>
+                    <p class="section-desc">Khám phá các yêu cầu và đề nghị giúp đỡ ngay trong khu phố của bạn.</p>
+                </div>
+
+                <div class="map-wrapper reveal">
+                    <div class="map-legend">
+                        <div class="legend-item"><span class="legend-dot need-legend"></span> Cần giúp</div>
+                        <div class="legend-item"><span class="legend-dot offer-legend"></span> Có thể giúp</div>
+                    </div>
+                    <div class="map-container glass-card" id="map-mockup">
+                        <!-- SVG Map Background -->
+                        <svg class="map-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+                            <!-- Roads -->
+                            <rect x="0" y="280" width="1200" height="40" fill="var(--road-color)" rx="2"/>
+                            <rect x="0" y="420" width="1200" height="30" fill="var(--road-color)" rx="2"/>
+                            <rect x="560" y="0" width="40" fill="var(--road-color)" height="600" rx="2"/>
+                            <rect x="300" y="0" width="30" fill="var(--road-color)" height="600" rx="2"/>
+                            <rect x="850" y="0" width="30" fill="var(--road-color)" height="600" rx="2"/>
+                            <!-- Buildings -->
+                            <rect x="60" y="50" width="200" height="180" rx="12" fill="var(--building-1)"/>
+                            <rect x="70" y="60" width="60" height="40" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            <rect x="150" y="60" width="60" height="40" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            <rect x="70" y="120" width="60" height="40" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            <rect x="150" y="120" width="60" height="40" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            
+                            <rect x="370" y="30" width="150" height="220" rx="12" fill="var(--building-2)"/>
+                            <rect x="385" y="45" width="40" height="35" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            <rect x="440" y="45" width="40" height="35" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            <rect x="385" y="100" width="40" height="35" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            <rect x="440" y="100" width="40" height="35" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            <rect x="385" y="155" width="40" height="35" rx="4" fill="var(--window-color)" opacity="0.6"/>
+                            <rect x="440" y="155" width="40" height="35" rx="4" fill="var(--window-color)" opacity="0.6"/>
+
+                            <rect x="640" y="60" width="170" height="160" rx="12" fill="var(--building-3)"/>
+                            <rect x="920" y="40" width="220" height="200" rx="12" fill="var(--building-1)"/>
+                            
+                            <rect x="60" y="340" width="180" height="60" rx="8" fill="var(--building-4)"/>
+                            <rect x="370" y="330" width="160" height="70" rx="8" fill="var(--building-2)"/>
+                            <rect x="640" y="340" width="170" height="60" rx="8" fill="var(--building-3)"/>
+                            <rect x="920" y="330" width="200" height="70" rx="8" fill="var(--building-4)"/>
+                            
+                            <rect x="60" y="470" width="200" height="100" rx="12" fill="var(--building-3)"/>
+                            <rect x="370" y="460" width="150" height="120" rx="12" fill="var(--building-1)"/>
+                            <rect x="640" y="470" width="170" height="100" rx="12" fill="var(--building-4)"/>
+                            <rect x="920" y="460" width="220" height="120" rx="12" fill="var(--building-2)"/>
+
+                            <!-- Park / Green Areas -->
+                            <ellipse cx="760" cy="150" rx="40" ry="50" fill="var(--park-color)" opacity="0.5"/>
+                            <ellipse cx="200" cy="520" rx="30" ry="35" fill="var(--park-color)" opacity="0.5"/>
+                            <ellipse cx="500" cy="370" rx="25" ry="30" fill="var(--park-color)" opacity="0.4"/>
+                        </svg>
+                        
+                        <div class="map-overlay">
+                            <button class="map-btn" id="map-zoom-in"><i class="fa-solid fa-plus"></i></button>
+                            <button class="map-btn" id="map-zoom-out"><i class="fa-solid fa-minus"></i></button>
+                            <button class="map-btn" id="map-locate"><i class="fa-solid fa-location-crosshairs"></i></button>
+                        </div>
+
+                        <div class="map-location-label glass-card">
+                            <i class="fa-solid fa-map-marker-alt"></i> Khu dân cư Sunrise City, Q.7
+                        </div>
+
+                        <div id="map-pins-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. HOW IT WORKS -->
+        <section id="how-it-works" class="section-padding hiw-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Quy trình đơn giản</span>
+                    <h2 class="section-title">Bắt đầu chỉ trong 3 bước</h2>
+                    <p class="section-desc">Không cần tải ứng dụng, không cần đăng ký phức tạp. Mọi thứ đều nhanh và dễ dàng.</p>
+                </div>
+                
+                <div class="steps-grid">
+                    <div class="step-card glass-card reveal">
+                        <div class="step-number">01</div>
+                        <div class="step-icon-wrap"><i class="fa-solid fa-pen-to-square"></i></div>
+                        <h3>Đăng yêu cầu</h3>
+                        <p>Mô tả ngắn gọn việc bạn cần giúp hoặc thứ bạn có thể chia sẻ.</p>
+                    </div>
+                    <div class="step-connector reveal"><div class="connector-line"></div><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="step-card glass-card reveal" style="transition-delay: 0.15s">
+                        <div class="step-number">02</div>
+                        <div class="step-icon-wrap"><i class="fa-solid fa-bell"></i></div>
+                        <h3>Hàng xóm nhìn thấy</h3>
+                        <p>LocalHelp thông báo cho những hàng xóm đáng tin cậy trong khu vực.</p>
+                    </div>
+                    <div class="step-connector reveal"><div class="connector-line"></div><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="step-card glass-card reveal" style="transition-delay: 0.3s">
+                        <div class="step-number">03</div>
+                        <div class="step-icon-wrap"><i class="fa-solid fa-people-arrows"></i></div>
+                        <h3>Kết nối & giúp đỡ</h3>
+                        <p>Nhắn tin, gặp mặt và lan tỏa tinh thần cộng đồng yêu thương.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. COMMUNITY IMPACT SECTION -->
+        <section class="section-padding impact-section" id="impact">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Tác động cộng đồng</span>
+                    <h2 class="section-title">Con số biết nói</h2>
+                </div>
+                <div class="impact-grid">
+                    <div class="impact-stats reveal">
+                        <div class="stat-item glass-card">
+                            <i class="fa-solid fa-hand-holding-heart stat-icon"></i>
+                            <span class="stat-number" data-target="1250">0</span>
+                            <span class="stat-label">Lượt hỗ trợ thành công</span>
+                        </div>
+                        <div class="stat-item glass-card">
+                            <i class="fa-solid fa-users stat-icon"></i>
+                            <span class="stat-number" data-target="850">0</span>
+                            <span class="stat-label">Thành viên tích cực</span>
+                        </div>
+                        <div class="stat-item glass-card">
+                            <i class="fa-solid fa-bolt stat-icon"></i>
+                            <span class="stat-number" data-target="5" data-suffix=" phút">0</span>
+                            <span class="stat-label">Phản hồi trung bình</span>
+                        </div>
+                        <div class="stat-item glass-card">
+                            <i class="fa-solid fa-star stat-icon"></i>
+                            <span class="stat-number" data-target="98" data-suffix="%">0</span>
+                            <span class="stat-label">Hài lòng dịch vụ</span>
+                        </div>
+                    </div>
+                    <div class="impact-testimonials reveal">
+                        <div class="testimonial-card glass-card active" id="testimonial-0">
+                            <i class="fa-solid fa-quote-left quote-icon"></i>
+                            <p>"Từ khi có LocalHelp, tôi cảm thấy an tâm hơn hẳn khi sống một mình. Cảm ơn bác hàng xóm đã giúp tôi sửa vòi nước hỏng vào đêm khuya!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?u=anna" alt="An Nhiên">
+                                <div>
+                                    <strong>An Nhiên</strong>
+                                    <span>Cư dân Vinhomes Central Park</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card glass-card" id="testimonial-1">
+                            <i class="fa-solid fa-quote-left quote-icon"></i>
+                            <p>"Mình mới chuyển đến khu này, nhờ LocalHelp mà quen được nhiều hàng xóm tốt bụng. Cộng đồng rất ấm áp!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?u=duc" alt="Đức Minh">
+                                <div>
+                                    <strong>Đức Minh</strong>
+                                    <span>Sinh viên KTX VKU</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card glass-card" id="testimonial-2">
+                            <i class="fa-solid fa-quote-left quote-icon"></i>
+                            <p>"Con gái tôi bị sốt đêm khuya, nhờ có LocalHelp mà tìm được chị hàng xóm y tá giúp đỡ kịp thời. Biết ơn vô cùng!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?u=thao" alt="Thu Thảo">
+                                <div>
+                                    <strong>Thu Thảo</strong>
+                                    <span>Cư dân Sunrise City Q.7</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-dots">
+                            <button class="t-dot active" data-index="0"></button>
+                            <button class="t-dot" data-index="1"></button>
+                            <button class="t-dot" data-index="2"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. FINAL EMOTIONAL CTA -->
+        <section class="final-cta" id="final-cta">
+            <div class="container reveal">
+                <div class="cta-card">
+                    <div class="cta-glow"></div>
+                    <span class="cta-emoji">🏘️</span>
+                    <h2>Mọi sự giúp đỡ, dù nhỏ nhất,<br>đều có <span class="highlight-white">giá trị.</span></h2>
+                    <p>Hãy trở thành một mảnh ghép trong cộng đồng LocalHelp ngay hôm nay.</p>
+                    <a href="#" class="btn btn-cta" id="cta-btn">
+                        <i class="fa-solid fa-rocket"></i>
+                        Bắt đầu kết nối với hàng xóm
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo"><i class="fa-solid fa-hand-holding-heart"></i> LocalHelp</span>
+                    <p>Vì một cộng đồng hàng xóm gắn kết và yêu thương.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Sản phẩm</h4>
+                    <a href="#">Tính năng</a>
+                    <a href="#">Bảng giá</a>
+                    <a href="#">Đối tác</a>
+                    <a href="#">Tải ứng dụng</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Hỗ trợ</h4>
+                    <a href="#">Về chúng tôi</a>
+                    <a href="#">Trung tâm hỗ trợ</a>
+                    <a href="#">Chính sách bảo mật</a>
+                    <a href="#">Điều khoản sử dụng</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Liên hệ</h4>
+                    <a href="#"><i class="fa-solid fa-envelope"></i> LocalUs@gmail.com</a>
+                    <a href="#"><i class="fa-solid fa-phone"></i> 0914756888</a>
+                    <a href="#"><i class="fa-solid fa-location-dot"></i> TP. Đà <ẵng</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 LocalHelp. Tham dự cuộc thi <strong>Best Web Design</strong>.</span>
+                <span>Made with <i class="fa-solid fa-heart" style="color: #f44336;"></i> for community.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
