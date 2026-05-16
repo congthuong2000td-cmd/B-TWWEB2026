@@ -136,6 +136,27 @@ document.addEventListener('DOMContentLoaded', () => {
         { top: '45%', left: '20%', type: 'need', title: 'Bê tủ lạnh', user: 'Chị Lan' }
     ];
 
+    // --- Hero Buttons Logic ---
+    const heroNeedBtn = document.getElementById('hero-need-btn');
+    const heroOfferBtn = document.getElementById('hero-offer-btn');
+
+    function handleHeroAction(type) {
+        const marketplaceSection = document.getElementById('marketplace');
+        if (marketplaceSection) {
+            marketplaceSection.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                openModal();
+                const typeSelect = document.getElementById('post-type');
+                if (typeSelect) {
+                    typeSelect.value = type;
+                }
+            }, 800);
+        }
+    }
+
+    if (heroNeedBtn) heroNeedBtn.addEventListener('click', () => handleHeroAction('need'));
+    if (heroOfferBtn) heroOfferBtn.addEventListener('click', () => handleHeroAction('offer'));
+
     // --- Navbar Scroll Effect ---
     const navbar = document.getElementById('navbar');
     if (navbar) {
