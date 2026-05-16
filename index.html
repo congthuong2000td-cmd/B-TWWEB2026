@@ -197,11 +197,16 @@
                     </div>
                     
                     <div class="filter-row">
-                        <div class="type-toggle" id="type-toggle" data-active="all">
-                            <div class="toggle-slider"></div>
-                            <button class="toggle-btn active" data-filter="all">Tất cả</button>
-                            <button class="toggle-btn" data-filter="need">Cần giúp</button>
-                            <button class="toggle-btn" data-filter="offer">Có thể giúp</button>
+                        <div class="filter-groups">
+                            <button class="filter-all-btn active" id="btn-filter-all" data-filter="all">Tất cả</button>
+                            
+                            <div class="type-toggle-wrapper">
+                                <div class="type-toggle" id="type-toggle" data-active="none">
+                                    <div class="toggle-slider"></div>
+                                    <button class="toggle-btn" data-filter="need">Cần giúp</button>
+                                    <button class="toggle-btn" data-filter="offer">Có thể giúp</button>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="category-filters" id="category-filters">

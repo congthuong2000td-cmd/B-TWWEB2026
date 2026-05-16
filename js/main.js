@@ -142,9 +142,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleHeroAction(type) {
         const marketplaceSection = document.getElementById('marketplace');
+        const btnFilterAll = document.getElementById('btn-filter-all');
+        const toggleBtn = document.querySelector(`.toggle-btn[data-filter="${type}"]`);
+        
         if (marketplaceSection) {
             marketplaceSection.scrollIntoView({ behavior: 'smooth' });
             setTimeout(() => {
+                // Set filter UI
+                if (btnFilterAll) btnFilterAll.classList.remove('active');
+                if (toggleBtn) toggleBtn.click();
+                
                 openModal();
                 const typeSelect = document.getElementById('post-type');
                 if (typeSelect) {
@@ -364,11 +371,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Filter Logic ---
+    const btnFilterAll = document.getElementById('btn-filter-all');
     const toggleBtns = document.querySelectorAll('.toggle-btn');
     const typeToggle = document.getElementById('type-toggle');
     
+    if (btnFilterAll) {
+        btnFilterAll.addEventListener('click', () => {
+            btnFilterAll.classList.add('active');
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            if (typeToggle) typeToggle.setAttribute('data-active', 'none');
+            currentFilter = 'all';
+            renderCards();
+        });
+    }
+
     toggleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            if (btnFilterAll) btnFilterAll.classList.remove('active');
             toggleBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentFilter = btn.getAttribute('data-filter');
