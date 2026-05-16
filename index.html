@@ -185,9 +185,15 @@
                 </div>
                 
                 <div class="marketplace-controls reveal">
-                    <div class="search-wrapper">
-                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                        <input type="text" id="market-search" class="search-input" placeholder="Tìm kiếm nhu cầu, đồ dùng, sự giúp đỡ...">
+                    <div class="controls-top">
+                        <div class="search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" id="market-search" class="search-input" placeholder="Tìm kiếm nhu cầu, đồ dùng, sự giúp đỡ...">
+                        </div>
+                        <button class="btn-add-post" id="open-modal-btn">
+                            <i class="fa-solid fa-circle-plus"></i>
+                            Tạo bài đăng
+                        </button>
                     </div>
                     
                     <div class="filter-row">
@@ -478,6 +484,49 @@
             </div>
         </div>
     </footer>
+
+    <!-- Post Modal -->
+    <div class="modal" id="post-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+            <h2 id="modal-title">Tạo bài đăng mới</h2>
+            <form id="post-form">
+                <input type="hidden" id="post-id">
+                <div class="form-group">
+                    <label for="post-type">Loại bài đăng</label>
+                    <select id="post-type" required>
+                        <option value="need">Cần giúp đỡ</option>
+                        <option value="offer">Có thể giúp đỡ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="post-category">Danh mục</label>
+                    <select id="post-category" required>
+                        <option value="tools">Đồ dùng</option>
+                        <option value="skills">Kỹ năng</option>
+                        <option value="pets">Thú cưng</option>
+                        <option value="other">Khác</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="post-title">Tiêu đề</label>
+                    <input type="text" id="post-title" placeholder="VD: Cần mượn máy khoan" required>
+                </div>
+                <div class="form-group">
+                    <label for="post-desc">Mô tả chi tiết</label>
+                    <textarea id="post-desc" rows="4" placeholder="Mô tả cụ thể nhu cầu hoặc sự giúp đỡ của bạn..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="post-location">Vị trí (Block/Khoảng cách)</label>
+                    <input type="text" id="post-location" placeholder="VD: Block A - 50m" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-modal-btn">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="save-post-btn">Lưu bài đăng</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="js/main.js"></script>
 </body>

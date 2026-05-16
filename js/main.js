@@ -28,16 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Sample Data ---
-    const helpData = [
+    // --- Sample Data & Persistence ---
+    const defaultHelpData = [
         {
             id: 1,
             type: 'need',
+            category: 'tools',
             user: 'Minh Hoàng',
             avatar: 'https://i.pravatar.cc/150?u=minh',
             title: 'Cần mượn máy khoan bê tông',
             desc: 'Tôi cần khoan vài lỗ treo tranh, chỉ dùng trong khoảng 30 phút. Có ai ở khu Block A có không ạ?',
-            category: 'tools',
             location: 'Block A - 50m',
             time: '2 giờ trước'
         },
@@ -97,6 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
             time: '3 giờ trước'
         }
     ];
+
+    let helpData = JSON.parse(localStorage.getItem('localhelp_posts')) || defaultHelpData;
+
+    function saveToStorage() {
+        localStorage.setItem('localhelp_posts', JSON.stringify(helpData));
+    }
 
     const activitiesData = [
         {
@@ -174,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const matchesType = currentFilter === 'all' || item.type === currentFilter;
             const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
             const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                item.desc.toLowerCase().includes(searchQuery.toLowerCase());
+                                 item.desc.toLowerCase().includes(searchQuery.toLowerCase());
             return matchesType && matchesCategory && matchesSearch;
         });
         
@@ -195,8 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>${item.time}</span>
                         </div>
                     </div>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <button class="switch-type-btn" data-id="${item.id}" title="Chuyển đổi Cần/Có thể" style="background:none; border:none; cursor:pointer; color:var(--text-muted); font-size:1.1rem;"><i class="fa-solid fa-rotate"></i></button>
+                    <div class="card-actions">
+                        <button class="action-btn btn-edit" data-id="${item.id}" title="Sửa bài"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="action-btn btn-delete" data-id="${item.id}" title="Xóa bài"><i class="fa-solid fa-trash"></i></button>
+                        <button class="switch-type-btn action-btn" data-id="${item.id}" title="Chuyển đổi Cần/Có thể"><i class="fa-solid fa-rotate"></i></button>
                         <span class="card-tag tag-${item.type}">${item.type === 'need' ? 'Cần giúp' : 'Có thể giúp'}</span>
                     </div>
                 </div>
@@ -218,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => card.classList.add('active'), 50);
         });
 
-        // Add event listeners for type switching
+        // Add event listeners for actions
         document.querySelectorAll('.switch-type-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -226,9 +234,100 @@ document.addEventListener('DOMContentLoaded', () => {
                 const item = helpData.find(i => i.id === id);
                 if (item) {
                     item.type = item.type === 'need' ? 'offer' : 'need';
+                    saveToStorage();
                     renderCards();
                 }
             });
+        });
+
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (confirm('Bạn có chắc chắn muốn xóa bài đăng này?')) {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    helpData = helpData.filter(item => item.id !== id);
+                    saveToStorage();
+                    renderCards();
+                }
+            });
+        });
+
+        document.querySelectorAll('.btn-edit').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.getAttribute('data-id'));
+                const item = helpData.find(i => i.id === id);
+                if (item) openModal(item);
+            });
+        });
+    }
+
+    // --- Modal Logic ---
+    const modal = document.getElementById('post-modal');
+    const postForm = document.getElementById('post-form');
+    const openModalBtn = document.getElementById('open-modal-btn');
+    const closeModalBtns = [
+        document.getElementById('close-modal-btn'),
+        document.getElementById('cancel-modal-btn')
+    ];
+
+    function openModal(editItem = null) {
+        if (!modal) return;
+        modal.classList.add('active');
+        
+        if (editItem) {
+            document.getElementById('modal-title').innerText = 'Chỉnh sửa bài đăng';
+            document.getElementById('post-id').value = editItem.id;
+            document.getElementById('post-type').value = editItem.type;
+            document.getElementById('post-category').value = editItem.category;
+            document.getElementById('post-title').value = editItem.title;
+            document.getElementById('post-desc').value = editItem.desc;
+            document.getElementById('post-location').value = editItem.location;
+        } else {
+            document.getElementById('modal-title').innerText = 'Tạo bài đăng mới';
+            postForm.reset();
+            document.getElementById('post-id').value = '';
+        }
+    }
+
+    function closeModal() {
+        if (modal) modal.classList.remove('active');
+    }
+
+    if (openModalBtn) openModalBtn.addEventListener('click', () => openModal());
+    closeModalBtns.forEach(btn => {
+        if (btn) btn.addEventListener('click', closeModal);
+    });
+
+    if (postForm) {
+        postForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const id = document.getElementById('post-id').value;
+            const postData = {
+                id: id ? parseInt(id) : Date.now(),
+                type: document.getElementById('post-type').value,
+                category: document.getElementById('post-category').value,
+                title: document.getElementById('post-title').value,
+                desc: document.getElementById('post-desc').value,
+                location: document.getElementById('post-location').value,
+                user: id ? helpData.find(i => i.id === parseInt(id)).user : 'Bạn (Hàng xóm)',
+                avatar: id ? helpData.find(i => i.id === parseInt(id)).avatar : 'https://i.pravatar.cc/150?u=you',
+                time: id ? helpData.find(i => i.id === parseInt(id)).time : 'Vừa xong'
+            };
+
+            if (id) {
+                // Update
+                const index = helpData.findIndex(i => i.id === parseInt(id));
+                helpData[index] = postData;
+            } else {
+                // Create
+                helpData.unshift(postData);
+            }
+
+            saveToStorage();
+            renderCards();
+            closeModal();
         });
     }
 
@@ -290,12 +389,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (switchToHelpBtn) {
         switchToHelpBtn.addEventListener('click', () => {
             const marketplaceSection = document.getElementById('marketplace');
-            const filterNeedBtn = document.getElementById('filter-need');
+            const filterNeedBtn = document.querySelector('.toggle-btn[data-filter="need"]');
             
             if (marketplaceSection) {
                 marketplaceSection.scrollIntoView({ behavior: 'smooth' });
                 
-                // Set filter to 'need' after a small delay to let scroll finish
                 setTimeout(() => {
                     if (filterNeedBtn) {
                         filterNeedBtn.click();
