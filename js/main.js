@@ -37,12 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
             avatar: 'https://i.pravatar.cc/150?u=minh',
             title: 'Cần mượn máy khoan bê tông',
             desc: 'Tôi cần khoan vài lỗ treo tranh, chỉ dùng trong khoảng 30 phút. Có ai ở khu Block A có không ạ?',
+            category: 'tools',
             location: 'Block A - 50m',
             time: '2 giờ trước'
         },
         {
             id: 2,
             type: 'offer',
+            category: 'skills',
             user: 'Bác Hùng',
             avatar: 'https://i.pravatar.cc/150?u=hung',
             title: 'Hỗ trợ sửa điện gia dụng nhẹ',
@@ -53,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 3,
             type: 'need',
+            category: 'pets',
             user: 'Linh Chi',
             avatar: 'https://i.pravatar.cc/150?u=chi',
             title: 'Tìm người trông cún chiều nay',
@@ -63,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 4,
             type: 'offer',
+            category: 'tools',
             user: 'Tuấn Anh',
             avatar: 'https://i.pravatar.cc/150?u=tuan',
             title: 'Cho mượn bộ đồ nghề sửa xe',
@@ -73,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 5,
             type: 'need',
+            category: 'other',
             user: 'Chị Lan',
             avatar: 'https://i.pravatar.cc/150?u=lan',
             title: 'Cần người bê giúp tủ lạnh',
@@ -83,12 +88,37 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 6,
             type: 'offer',
+            category: 'other',
             user: 'Thanh Vân',
             avatar: 'https://i.pravatar.cc/150?u=van',
             title: 'Tặng rau sạch Đà Lạt',
             desc: 'Người nhà gửi lên nhiều quá ăn không hết, mình tặng bớt cho hàng xóm. Rau rất tươi và sạch.',
             location: 'Block D - 150m',
             time: '3 giờ trước'
+        }
+    ];
+
+    const activitiesData = [
+        {
+            id: 1,
+            tag: 'Sẻ chia',
+            title: 'Tặng rau sạch Block D',
+            desc: 'Chị Vân đã chia sẻ hơn 5kg rau sạch cho các hộ gia đình khó khăn trong tòa nhà.',
+            img: 'https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=600'
+        },
+        {
+            id: 2,
+            tag: 'Kỹ thuật',
+            title: 'Sửa điện tầng 12',
+            desc: 'Bác Hùng giúp gia đình chị Lan khắc phục sự cố chập điện trong đêm mưa.',
+            img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=600'
+        },
+        {
+            id: 3,
+            tag: 'Thú cưng',
+            title: 'Gửi gắm yêu thương',
+            desc: 'Bé Poodle nhà Linh Chi đã có một buổi chiều vui vẻ cùng các bạn nhỏ tại công viên.',
+            img: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=600'
         }
     ];
 
@@ -132,12 +162,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Render Cards ---
     const cardsContainer = document.getElementById('cards-container');
+    let currentFilter = 'all';
+    let currentCategory = 'all';
+    let searchQuery = '';
     
-    function renderCards(filter = 'all') {
+    function renderCards() {
         if (!cardsContainer) return;
         cardsContainer.innerHTML = '';
-        const filteredData = filter === 'all' ? helpData : helpData.filter(item => item.type === filter);
         
+        const filteredData = helpData.filter(item => {
+            const matchesType = currentFilter === 'all' || item.type === currentFilter;
+            const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+            const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                item.desc.toLowerCase().includes(searchQuery.toLowerCase());
+            return matchesType && matchesCategory && matchesSearch;
+        });
+        
+        if (filteredData.length === 0) {
+            cardsContainer.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">Không tìm thấy kết quả phù hợp.</div>';
+            return;
+        }
+
         filteredData.forEach(item => {
             const card = document.createElement('div');
             card.className = `help-card glass-card reveal`;
@@ -150,7 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>${item.time}</span>
                         </div>
                     </div>
-                    <span class="card-tag tag-${item.type}">${item.type === 'need' ? 'Cần giúp' : 'Có thể giúp'}</span>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <button class="switch-type-btn" data-id="${item.id}" title="Chuyển đổi Cần/Có thể" style="background:none; border:none; cursor:pointer; color:var(--text-muted); font-size:1.1rem;"><i class="fa-solid fa-rotate"></i></button>
+                        <span class="card-tag tag-${item.type}">${item.type === 'need' ? 'Cần giúp' : 'Có thể giúp'}</span>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h3>${item.title}</h3>
@@ -169,19 +217,93 @@ document.addEventListener('DOMContentLoaded', () => {
             // Re-trigger reveal for new elements
             setTimeout(() => card.classList.add('active'), 50);
         });
+
+        // Add event listeners for type switching
+        document.querySelectorAll('.switch-type-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.getAttribute('data-id'));
+                const item = helpData.find(i => i.id === id);
+                if (item) {
+                    item.type = item.type === 'need' ? 'offer' : 'need';
+                    renderCards();
+                }
+            });
+        });
     }
 
     renderCards();
 
+    // --- Search Logic ---
+    const searchInput = document.getElementById('market-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderCards();
+        });
+    }
+
     // --- Filter Logic ---
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    tabBtns.forEach(btn => {
+    const toggleBtns = document.querySelectorAll('.toggle-btn');
+    const typeToggle = document.getElementById('type-toggle');
+    
+    toggleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            tabBtns.forEach(b => b.classList.remove('active'));
+            toggleBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            renderCards(btn.getAttribute('data-filter'));
+            currentFilter = btn.getAttribute('data-filter');
+            if (typeToggle) typeToggle.setAttribute('data-active', currentFilter);
+            renderCards();
         });
     });
+
+    const categoryChips = document.querySelectorAll('.category-chip');
+    categoryChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            categoryChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            currentCategory = chip.getAttribute('data-category');
+            renderCards();
+        });
+    });
+
+    // --- Render Activities ---
+    const activitiesContainer = document.getElementById('activities-container');
+    if (activitiesContainer) {
+        activitiesData.forEach(act => {
+            const actCard = document.createElement('div');
+            actCard.className = 'activity-card reveal';
+            actCard.innerHTML = `
+                <img src="${act.img}" alt="${act.title}" class="activity-img">
+                <div class="activity-overlay">
+                    <span class="activity-tag">${act.tag}</span>
+                    <h3>${act.title}</h3>
+                    <p>${act.desc}</p>
+                </div>
+            `;
+            activitiesContainer.appendChild(actCard);
+        });
+    }
+
+    // --- Switch to Help Logic ---
+    const switchToHelpBtn = document.getElementById('switch-to-help');
+    if (switchToHelpBtn) {
+        switchToHelpBtn.addEventListener('click', () => {
+            const marketplaceSection = document.getElementById('marketplace');
+            const filterNeedBtn = document.getElementById('filter-need');
+            
+            if (marketplaceSection) {
+                marketplaceSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Set filter to 'need' after a small delay to let scroll finish
+                setTimeout(() => {
+                    if (filterNeedBtn) {
+                        filterNeedBtn.click();
+                    }
+                }, 600);
+            }
+        });
+    }
 
     // --- Render Map Pins ---
     const mapPinsContainer = document.getElementById('map-pins-container');

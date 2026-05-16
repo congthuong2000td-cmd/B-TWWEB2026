@@ -38,6 +38,7 @@
             <div class="nav-links" id="nav-links">
                 <a href="#story">Câu chuyện</a>
                 <a href="#marketplace">Cộng đồng</a>
+                <a href="#activities">Hoạt động</a>
                 <a href="#map">Bản đồ</a>
                 <a href="#how-it-works">Cách thức</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
@@ -57,6 +58,7 @@
     <div class="mobile-menu" id="mobile-menu">
         <a href="#story" class="mobile-link">Câu chuyện</a>
         <a href="#marketplace" class="mobile-link">Cộng đồng</a>
+        <a href="#activities" class="mobile-link">Hoạt động</a>
         <a href="#map" class="mobile-link">Bản đồ</a>
         <a href="#how-it-works" class="mobile-link">Cách thức</a>
         <a href="#final-cta" class="btn btn-primary" style="margin-top:16px;">Tham gia ngay</a>
@@ -182,16 +184,28 @@
                     <p class="section-desc">Khám phá các yêu cầu hỗ trợ và đề nghị giúp đỡ từ hàng xóm xung quanh bạn.</p>
                 </div>
                 
-                <div class="filter-tabs reveal">
-                    <button class="tab-btn active" data-filter="all" id="filter-all">
-                        <i class="fa-solid fa-border-all"></i> Tất cả
-                    </button>
-                    <button class="tab-btn" data-filter="need" id="filter-need">
-                        <i class="fa-solid fa-hand-holding-heart"></i> Cần giúp
-                    </button>
-                    <button class="tab-btn" data-filter="offer" id="filter-offer">
-                        <i class="fa-solid fa-gift"></i> Có thể giúp
-                    </button>
+                <div class="marketplace-controls reveal">
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="market-search" class="search-input" placeholder="Tìm kiếm nhu cầu, đồ dùng, sự giúp đỡ...">
+                    </div>
+                    
+                    <div class="filter-row">
+                        <div class="type-toggle" id="type-toggle" data-active="all">
+                            <div class="toggle-slider"></div>
+                            <button class="toggle-btn active" data-filter="all">Tất cả</button>
+                            <button class="toggle-btn" data-filter="need">Cần giúp</button>
+                            <button class="toggle-btn" data-filter="offer">Có thể giúp</button>
+                        </div>
+
+                        <div class="category-filters" id="category-filters">
+                            <div class="category-chip active" data-category="all">Tất cả danh mục</div>
+                            <div class="category-chip" data-category="tools">Đồ dùng</div>
+                            <div class="category-chip" data-category="skills">Kỹ năng</div>
+                            <div class="category-chip" data-category="pets">Thú cưng</div>
+                            <div class="category-chip" data-category="other">Khác</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="cards-grid" id="cards-container">
@@ -303,6 +317,32 @@
                         <h3>Kết nối & giúp đỡ</h3>
                         <p>Nhắn tin, gặp mặt và lan tỏa tinh thần cộng đồng yêu thương.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5.5 ACTIVITIES SECTION -->
+        <section id="activities" class="section-padding activities-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Hoạt động tiêu biểu</span>
+                    <h2 class="section-title">Khoảnh khắc gắn kết</h2>
+                    <p class="section-desc">Những câu chuyện thực tế về sự giúp đỡ và chia sẻ trong cộng đồng LocalHelp.</p>
+                </div>
+
+                <div class="activities-grid" id="activities-container">
+                    <!-- Activities populated by JS -->
+                </div>
+
+                <div class="can-help-promo reveal">
+                    <div class="promo-text">
+                        <h3>Bạn đã sẵn sàng giúp đỡ?</h3>
+                        <p>Hàng xóm quanh bạn đang cần sự hỗ trợ ngay lúc này.</p>
+                    </div>
+                    <button class="btn btn-secondary" id="switch-to-help">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                        Xem việc cần giúp ngay
+                    </button>
                 </div>
             </div>
         </section>
